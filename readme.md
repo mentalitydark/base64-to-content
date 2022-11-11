@@ -1,4 +1,4 @@
-## Exibindo conteúdo a partir de base64
+## PHP - Exibindo conteúdo a partir de base64
 
 Primeiro de tudo será necessário uma string base64 e com isso você define o mime type referente ao conteúdo.
 Caso você só tenha a base64, você pode obter através desse código:
@@ -12,7 +12,7 @@ Caso você só tenha a base64, você pode obter através desse código:
 $base64 = "Sua string base64 aqui.";
 
 $fileInfo = new finfo(FILEINFO_MIME_TYPE);
-$mimeType = $fileInfo->buffer(file_get_contents("data:;base64,$base64"));
+$mimeType = $fileInfo->buffer(file_get_contents("data:;base64,{$base64}"));
 
 ?>
 ```
@@ -26,7 +26,7 @@ Tendo o mime type e o base64 basta você definir o header Content-Type e exibir 
 header("Content-Type: {$mimeType}");
 header("Content-Disposition: inline; filename=\"Nome de saída do arquivo . extensão\";"); // Caso você queira definir um nome para o download. Não é obrigatório.
 
-echo file_get_contents("data://{$mimeType};base64,$content");
+echo file_get_contents("data://{$mimeType};base64,{$content}");
 
 ?>
 ```
